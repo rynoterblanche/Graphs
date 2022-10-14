@@ -1,5 +1,6 @@
 ﻿using Graphs.Core;
 using Graphs.Shared.Exceptions;
+using Graphs.Shared.Interfaces;
 
 namespace Graphs.Shared.Tools;
 
@@ -52,5 +53,33 @@ public class Dag
             throw new CyclicGraphException<T>("Cannot sort cyclic graph!", tempEdges);
 
         return sorted;
+    }
+
+    public static void Traverse<T>(Graph<T> graph, IGraphVisitor<T> visitor)
+    {
+        var nodesWithDependencies = graph.Edges.Select(edge => edge.ToNode);
+        var nodesWithNoDependencies = graph.Where(node => !nodesWithDependencies.Contains(node)).ToList();
+
+        var tempEdges = graph.Edges.ToList();
+
+        while (nodesWithNoDependencies.Count > 0)
+        {
+            var nextNode = nodesWithNoDependencies.First();
+            nodesWithNoDependencies.Remove(nextNode);
+            visitor.Visit(nextNode);
+
+            var edges = graph.Edges
+                .Where(edge => edge.FromNode == nextNode)
+                .ToList();
+            foreach (var edge in edges)
+            {
+                tempEdges.Remove(edge);
+
+                if (tempEdges.Any(e => e.ToNode == edge.ToNode))
+                    continue;
+
+                nodesWithNoDependencies.Add(edge.ToNode);
+            }
+        }
     }
 }

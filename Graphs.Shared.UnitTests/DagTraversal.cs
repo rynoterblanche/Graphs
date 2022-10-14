@@ -1,12 +1,13 @@
 ﻿using Graphs.Core;
+using Graphs.Shared.Interfaces;
 using Graphs.Shared.Tools;
 
 namespace Graphs.Shared.UnitTests;
 
-public class DagTopoSort
+public class DagTraversal
 {
     [Fact]
-    public void SimpleGraphOrder()
+    public void TraverseSimpleGraph()
     {
         var graph = new GraphBuilder<string>()
             .WithEdge("A", "B")
@@ -15,14 +16,14 @@ public class DagTopoSort
             .WithEdge("C", "D")
             .Build();
 
-        var sorted = Dag.TopoSort(graph);
+        var visitor = new FakeVisitor<string>();
+        Dag.Traverse(graph, visitor);
 
-        var sortedValues = string.Join("", sorted.Select(node => node.Value));
-        Assert.Equal("ABCD", sortedValues);
+        Assert.Equal(new string[] {"A", "B", "C", "D"}, visitor.VisitedValues);
     }
 
     [Fact]
-    public void MoreComplexGraphOrder()
+    public void TraverseMoreComplexGraph()
     {
         var graph = new GraphBuilder<string>()
             .WithEdge("A", "B")
@@ -47,9 +48,19 @@ public class DagTopoSort
             .WithEdge("J", "K")
             .Build();
 
-        var sorted = Dag.TopoSort(graph);
-        var sortedValues = string.Join("", sorted.Select(node => node.Value));
-        Assert.Equal("ABCDEFGHIJK", sortedValues);
-    }
+        var visitor = new FakeVisitor<string>();
+        Dag.Traverse(graph, visitor);
 
+        Assert.Equal(new string[] {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K"}, visitor.VisitedValues);
+    }
+}
+
+public class FakeVisitor<T> : IGraphVisitor<T>
+{
+    public List<string> VisitedValues = new();
+
+    public void Visit(GraphNode<T> nextNode)
+    {
+        VisitedValues.Add(nextNode.Value.ToString());
+    }
 }
