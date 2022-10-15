@@ -2,49 +2,49 @@ using System.Collections;
 
 namespace Graphs.Core;
 
-public class Graph<T>: IEnumerable<GraphNode<T>>
+public class Graph<T>: IEnumerable<Vertex<T>>
 {
-    private readonly NodeList<T> _nodes;
-    public readonly List<GraphEdge<T>> Edges;
+    private readonly VertexList<T> _vertices;
+    private readonly EdgeList<T> _edges;
 
     public Graph()
     {
-        _nodes = new NodeList<T>();
-        Edges = new List<GraphEdge<T>>();
+        _vertices = new VertexList<T>();
+        _edges = new EdgeList<T>();
     }
 
-    public Graph(NodeList<T> nodes)
+    public Graph(VertexList<T> vertices)
     {
-        _nodes = nodes;
-        Edges = new List<GraphEdge<T>>();
+        _vertices = vertices;
+        _edges = new EdgeList<T>();
     }
 
-    public Graph(NodeList<T> nodes, List<GraphEdge<T>> edges)
+    public Graph(VertexList<T> vertices, EdgeList<T> edges)
     {
-        _nodes = nodes;
-        Edges = edges;
+        _vertices = vertices;
+        _edges = edges;
     }
 
-    public void AddNode(GraphNode<T> node)
+    public EdgeList<T> Edges => _edges;
+
+    public void AddVertex(Vertex<T> vertex)
     {
-        if (!_nodes.Contains(node))
-            _nodes.Add(node);
+        if (!_vertices.Contains(vertex))
+            _vertices.Add(vertex);
     }
 
-    public void AddDirectedEdge(GraphNode<T> from, GraphNode<T> to)
+    public void AddDirectedEdge(Vertex<T> from, Vertex<T> to)
     {
-        if (from.Neighbors.Contains(to))
+        if (Edges.Any(edge => edge.FromVertex == from && edge.ToVertex == to))
             return;
 
-        from.Neighbors.Add(to);
-
-        var newEdge = new GraphEdge<T>(from, to);
-        Edges.Add(newEdge);
+        var newEdge = new Edge<T>(from, to);
+        _edges.Add(newEdge);
     }
 
-    public IEnumerator<GraphNode<T>> GetEnumerator()
+    public IEnumerator<Vertex<T>> GetEnumerator()
     {
-        return _nodes.GetEnumerator();
+        return _vertices.GetEnumerator();
     }
 
     IEnumerator IEnumerable.GetEnumerator()

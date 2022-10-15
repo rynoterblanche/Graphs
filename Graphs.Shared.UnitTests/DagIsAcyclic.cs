@@ -9,15 +9,15 @@ namespace Graphs.Shared.UnitTests
         public void CyclicGraphReturnsFalse()
         {
             var graph = new Graph<int>();
-            var nodeA = new GraphNode<int>(1);
-            var nodeB = new GraphNode<int>(2);
-            var nodeC = new GraphNode<int>(3);
-            graph.AddNode(nodeA);
-            graph.AddNode(nodeB);
-            graph.AddNode(nodeC);
-            graph.AddDirectedEdge(nodeA, nodeB);
-            graph.AddDirectedEdge(nodeB, nodeC);
-            graph.AddDirectedEdge(nodeC, nodeA);
+            var vertexA = new Vertex<int>(1);
+            var vertexB = new Vertex<int>(2);
+            var vertexC = new Vertex<int>(3);
+            graph.AddVertex(vertexA);
+            graph.AddVertex(vertexB);
+            graph.AddVertex(vertexC);
+            graph.AddDirectedEdge(vertexA, vertexB);
+            graph.AddDirectedEdge(vertexB, vertexC);
+            graph.AddDirectedEdge(vertexC, vertexA);
 
             Assert.False(Dag.IsAcyclic(graph));
         }
@@ -26,18 +26,18 @@ namespace Graphs.Shared.UnitTests
         public void AcyclicGraphReturnsTrue()
         {
             var graph = new Graph<string>();
-            var nodeA = new GraphNode<string>("A");
-            var nodeB = new GraphNode<string>("B");
-            var nodeC = new GraphNode<string>("C");
-            var nodeD = new GraphNode<string>("D");
-            graph.AddNode(nodeA);
-            graph.AddNode(nodeB);
-            graph.AddNode(nodeC);
-            graph.AddNode(nodeD);
-            graph.AddDirectedEdge(nodeA, nodeB);
-            graph.AddDirectedEdge(nodeA, nodeD);
-            graph.AddDirectedEdge(nodeB, nodeC);
-            graph.AddDirectedEdge(nodeC, nodeD);
+            var vertexA = new Vertex<string>("A");
+            var vertexB = new Vertex<string>("B");
+            var vertexC = new Vertex<string>("C");
+            var vertexD = new Vertex<string>("D");
+            graph.AddVertex(vertexA);
+            graph.AddVertex(vertexB);
+            graph.AddVertex(vertexC);
+            graph.AddVertex(vertexD);
+            graph.AddDirectedEdge(vertexA, vertexB);
+            graph.AddDirectedEdge(vertexA, vertexD);
+            graph.AddDirectedEdge(vertexB, vertexC);
+            graph.AddDirectedEdge(vertexC, vertexD);
 
             Assert.True(Dag.IsAcyclic(graph));
         }

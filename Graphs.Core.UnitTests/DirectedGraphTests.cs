@@ -6,46 +6,50 @@ public class DirectedGraphTests
     public void AddAnEdge()
     {
         var graph = new Graph<int>();
-        var nodeA = new GraphNode<int>(1);
-        var nodeB = new GraphNode<int>(2);
-        graph.AddNode(nodeA);
-        graph.AddNode(nodeB);
-        graph.AddDirectedEdge(nodeA, nodeB);
+        var vertexA = new Vertex<int>(1);
+        var vertexB = new Vertex<int>(2);
+        graph.AddVertex(vertexA);
+        graph.AddVertex(vertexB);
+        graph.AddDirectedEdge(vertexA, vertexB);
 
-        Assert.Equal(2, nodeA.Neighbors.First().Value);
+        var edge = graph.Edges.First();
+        Assert.Equal(vertexA, edge.FromVertex);
+        Assert.Equal(vertexB, edge.ToVertex);
     }
 
     [Fact]
     public void AddSeveralEdges()
     {
         var graph = new Graph<int>();
-        var nodeA = new GraphNode<int>(1);
-        var nodeB = new GraphNode<int>(2);
-        var nodeC = new GraphNode<int>(3);
-        graph.AddNode(nodeA);
-        graph.AddNode(nodeB);
-        graph.AddNode(nodeC);
-        graph.AddDirectedEdge(nodeA, nodeB);
-        graph.AddDirectedEdge(nodeA, nodeC);
+        var vertexA = new Vertex<int>(1);
+        var vertexB = new Vertex<int>(2);
+        var vertexC = new Vertex<int>(3);
+        graph.AddVertex(vertexA);
+        graph.AddVertex(vertexB);
+        graph.AddVertex(vertexC);
+        graph.AddDirectedEdge(vertexA, vertexB);
+        graph.AddDirectedEdge(vertexA, vertexC);
 
-        Assert.Collection(nodeA.Neighbors,
-            item => Assert.Equal(2, item.Value),
-            item => Assert.Equal(3, item.Value)
-        );
+        var edge1 = graph.Edges[0];
+        Assert.Equal(vertexA, edge1.FromVertex);
+        Assert.Equal(vertexB, edge1.ToVertex);
+
+        var edge2 = graph.Edges[1];
+        Assert.Equal(vertexA, edge2.FromVertex);
+        Assert.Equal(vertexC, edge2.ToVertex);
     }
 
     [Fact]
     public void AddingSameEdgeMoreThanOnceIsIdempotent()
     {
         var graph = new Graph<int>();
-        var nodeA = new GraphNode<int>(1);
-        var nodeB = new GraphNode<int>(2);
-        graph.AddNode(nodeA);
-        graph.AddNode(nodeB);
-        graph.AddDirectedEdge(nodeA, nodeB);
-        graph.AddDirectedEdge(nodeA, nodeB);
+        var vertexA = new Vertex<int>(1);
+        var vertexB = new Vertex<int>(2);
+        graph.AddVertex(vertexA);
+        graph.AddVertex(vertexB);
+        graph.AddDirectedEdge(vertexA, vertexB);
+        graph.AddDirectedEdge(vertexA, vertexB);
 
-        Assert.Single(nodeA.Neighbors);
-        Assert.Equal(2, nodeA.Neighbors.First().Value);
+        Assert.Single(graph.Edges);
     }
 }

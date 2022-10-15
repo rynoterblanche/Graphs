@@ -20,11 +20,11 @@ public class Dag
         return true;
     }
 
-    public static List<GraphNode<T>> TopoSort<T>(Graph<T> graph)
+    public static List<Vertex<T>> TopoSort<T>(Graph<T> graph)
     {
-        var sorted = new List<GraphNode<T>>();
+        var sorted = new List<Vertex<T>>();
         
-        var nodesWithDependencies = graph.Edges.Select(edge => edge.ToNode);
+        var nodesWithDependencies = graph.Edges.Select(edge => edge.ToVertex);
         var nodesWithNoDependencies = graph.Where(node => !nodesWithDependencies.Contains(node)).ToList();
 
         var tempEdges = graph.Edges.ToList();
@@ -36,16 +36,16 @@ public class Dag
             sorted.Add(nextNode);
 
             var edges = graph.Edges
-                .Where(edge => edge.FromNode == nextNode)
+                .Where(edge => edge.FromVertex == nextNode)
                 .ToList();
             foreach (var edge in edges)
             {
                 tempEdges.Remove(edge);
 
-                if (tempEdges.Any(e => e.ToNode == edge.ToNode))
+                if (tempEdges.Any(e => e.ToVertex == edge.ToVertex))
                     continue;
 
-                nodesWithNoDependencies.Add(edge.ToNode);
+                nodesWithNoDependencies.Add(edge.ToVertex);
             }
         }
 
@@ -57,7 +57,7 @@ public class Dag
 
     public static void Traverse<T>(Graph<T> graph, IGraphVisitor<T> visitor)
     {
-        var nodesWithDependencies = graph.Edges.Select(edge => edge.ToNode);
+        var nodesWithDependencies = graph.Edges.Select(edge => edge.ToVertex);
         var nodesWithNoDependencies = graph.Where(node => !nodesWithDependencies.Contains(node)).ToList();
 
         var tempEdges = graph.Edges.ToList();
@@ -69,16 +69,16 @@ public class Dag
             visitor.Visit(nextNode);
 
             var edges = graph.Edges
-                .Where(edge => edge.FromNode == nextNode)
+                .Where(edge => edge.FromVertex == nextNode)
                 .ToList();
             foreach (var edge in edges)
             {
                 tempEdges.Remove(edge);
 
-                if (tempEdges.Any(e => e.ToNode == edge.ToNode))
+                if (tempEdges.Any(e => e.ToVertex == edge.ToVertex))
                     continue;
 
-                nodesWithNoDependencies.Add(edge.ToNode);
+                nodesWithNoDependencies.Add(edge.ToVertex);
             }
         }
     }

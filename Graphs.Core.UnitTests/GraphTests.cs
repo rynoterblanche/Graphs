@@ -3,22 +3,22 @@ namespace Graphs.Core.UnitTests
     public class GraphTests
     {
         [Fact]
-        public void AddASingleNode()
+        public void AddASingleVertex()
         {
             var graph = new Graph<int>();
-            graph.AddNode(new GraphNode<int>(1));
+            graph.AddVertex(new Vertex<int>(1));
 
             Assert.Single(graph);
             Assert.Equal(1, graph.First().Value);
         }           
         
         [Fact]
-        public void AddSeveralNodes()
+        public void AddSeveralVertexes()
         {
             var graph = new Graph<int>();
-            graph.AddNode(new GraphNode<int>(1));
-            graph.AddNode(new GraphNode<int>(2));
-            graph.AddNode(new GraphNode<int>(3));
+            graph.AddVertex(new Vertex<int>(1));
+            graph.AddVertex(new Vertex<int>(2));
+            graph.AddVertex(new Vertex<int>(3));
 
             Assert.Collection(graph,
                 item => Assert.Equal(1, item.Value),
@@ -28,12 +28,12 @@ namespace Graphs.Core.UnitTests
         }
 
         [Fact]
-        public void AddingSameNodeMoreThanOnceIsIdempotent()
+        public void AddingSameVertexMoreThanOnceIsIdempotent()
         {
             var graph = new Graph<int>();
-            var nodeA = new GraphNode<int>(1);
-            graph.AddNode(nodeA);
-            graph.AddNode(nodeA);
+            var vertex = new Vertex<int>(1);
+            graph.AddVertex(vertex);
+            graph.AddVertex(vertex);
 
             Assert.Single(graph);
             Assert.Equal(1, graph.First().Value);

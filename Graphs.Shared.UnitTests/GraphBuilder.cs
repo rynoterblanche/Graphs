@@ -8,21 +8,21 @@ public class GraphBuilder<T>
 
     public GraphBuilder<T> WithEdge(T fromValue, T toValue)
     {
-        var fromNode = _graph.FirstOrDefault(node => node.Value.Equals(fromValue));
-        if (fromNode == null)
+        var fromVertex = _graph.FirstOrDefault(v => v.Value.Equals(fromValue));
+        if (fromVertex == null)
         {
-            fromNode = new GraphNode<T>(fromValue);
-            _graph.AddNode(fromNode);
+            fromVertex = new Vertex<T>(fromValue);
+            _graph.AddVertex(fromVertex);
         }
 
-        var toNode = _graph.FirstOrDefault(node => node.Value.Equals(toValue));
-        if (toNode == null)
+        var toVertex = _graph.FirstOrDefault(v => v.Value.Equals(toValue));
+        if (toVertex == null)
         {
-            toNode = new GraphNode<T>(toValue);
-            _graph.AddNode(toNode);
+            toVertex = new Vertex<T>(toValue);
+            _graph.AddVertex(toVertex);
         }
 
-        _graph.AddDirectedEdge(fromNode, toNode);
+        _graph.AddDirectedEdge(fromVertex, toVertex);
 
         return this;
     }

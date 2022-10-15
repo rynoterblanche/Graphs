@@ -59,8 +59,8 @@ public class FakeVisitor<T> : IGraphVisitor<T>
 {
     public List<string> VisitedValues = new();
 
-    public void Visit(GraphNode<T> nextNode)
+    public void Visit(Vertex<T> nextVertex)
     {
-        VisitedValues.Add(nextNode.Value.ToString());
+        VisitedValues.Add(nextVertex.Value.ToString());
     }
 }
