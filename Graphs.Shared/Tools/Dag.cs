@@ -1,6 +1,6 @@
-﻿using Graphs.Core;
+﻿using Graphs.Core.Entities;
+using Graphs.Core.Interfaces;
 using Graphs.Shared.Exceptions;
-using Graphs.Shared.Interfaces;
 
 namespace Graphs.Shared.Tools;
 
@@ -82,4 +82,5 @@ public class Dag
             }
         }
     }
+
 }

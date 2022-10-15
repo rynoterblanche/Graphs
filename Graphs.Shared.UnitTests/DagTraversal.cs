@@ -1,5 +1,6 @@
 ﻿using Graphs.Core;
-using Graphs.Shared.Interfaces;
+using Graphs.Core.Entities;
+using Graphs.Core.Interfaces;
 using Graphs.Shared.Tools;
 
 namespace Graphs.Shared.UnitTests;

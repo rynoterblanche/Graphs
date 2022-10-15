@@ -1,3 +1,5 @@
+using Graphs.Core.Entities;
+
 namespace Graphs.Core.UnitTests
 {
     public class GraphTests

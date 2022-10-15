@@ -1,4 +1,4 @@
-namespace Graphs.Core;
+namespace Graphs.Core.Entities;
 
 public class Edge<T>
 {

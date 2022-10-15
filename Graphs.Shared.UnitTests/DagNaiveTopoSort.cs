@@ -1,9 +1,10 @@
 ﻿using Graphs.Core;
+using Graphs.Core.Entities;
 using Graphs.Shared.Tools;
 
 namespace Graphs.Shared.UnitTests;
 
-public class DagTopoSort
+public class DagNaiveTopoSort
 {
     [Fact]
     public void SimpleGraphOrder()

@@ -1,4 +1,6 @@
-﻿namespace Graphs.Core.UnitTests;
+﻿using Graphs.Core.Entities;
+
+namespace Graphs.Core.UnitTests;
 
 public class DirectedGraphTests
 {

@@ -1,8 +1,8 @@
 using System.Collections;
 
-namespace Graphs.Core;
+namespace Graphs.Core.Entities;
 
-public class Graph<T>: IEnumerable<Vertex<T>>
+public class Graph<T> : IEnumerable<Vertex<T>>
 {
     private readonly VertexList<T> _vertices;
     private readonly EdgeList<T> _edges;
@@ -38,6 +38,8 @@ public class Graph<T>: IEnumerable<Vertex<T>>
         if (Edges.Any(edge => edge.FromVertex == from && edge.ToVertex == to))
             return;
 
+        from.Neighbors.Add(to);
+
         var newEdge = new Edge<T>(from, to);
         _edges.Add(newEdge);
     }
@@ -51,4 +53,5 @@ public class Graph<T>: IEnumerable<Vertex<T>>
     {
         return GetEnumerator();
     }
+
 }

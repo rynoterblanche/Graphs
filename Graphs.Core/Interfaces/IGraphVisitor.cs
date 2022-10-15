@@ -1,6 +1,6 @@
-﻿using Graphs.Core;
+﻿using Graphs.Core.Entities;
 
-namespace Graphs.Shared.Interfaces;
+namespace Graphs.Core.Interfaces;
 
 public interface IGraphVisitor<T>
 {

@@ -1,4 +1,4 @@
-﻿using Graphs.Core;
+﻿using Graphs.Core.Entities;
 
 namespace Graphs.Shared.Exceptions;
 

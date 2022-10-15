@@ -1,4 +1,5 @@
 using Graphs.Core;
+using Graphs.Core.Entities;
 using Graphs.Shared.Tools;
 
 namespace Graphs.Shared.UnitTests
