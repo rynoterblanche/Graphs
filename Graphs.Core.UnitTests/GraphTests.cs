@@ -1,4 +1,5 @@
 using Graphs.Core.Entities;
+using Graphs.Core.Interfaces;
 
 namespace Graphs.Core.UnitTests
 {
@@ -39,6 +40,27 @@ namespace Graphs.Core.UnitTests
 
             Assert.Single(graph);
             Assert.Equal(1, graph.First().Value);
+        }
+
+        [Fact]
+        public void GraphIsSortable()
+        {
+            var graph = new Graph<int>();
+            var graphSorter = new FakeSort();
+            graph.Sort(graphSorter);
+
+            Assert.True(graphSorter.GraphSorted);
+        }
+    }
+
+    public class FakeSort : IGraphSorter<int>
+    {
+        public bool GraphSorted;
+
+        public List<Vertex<int>> Sort(Graph<int> graph)
+        {
+            GraphSorted = true;
+            return graph.ToList();
         }
     }
 }

@@ -1,4 +1,5 @@
 using System.Collections;
+using Graphs.Core.Interfaces;
 
 namespace Graphs.Core.Entities;
 
@@ -38,7 +39,8 @@ public class Graph<T> : IEnumerable<Vertex<T>>
         if (Edges.Any(edge => edge.FromVertex == from && edge.ToVertex == to))
             return;
 
-        from.Neighbors.Add(to);
+        from.Children.Add(to);
+        to.Parents.Add(from);
 
         var newEdge = new Edge<T>(from, to);
         _edges.Add(newEdge);
@@ -54,4 +56,8 @@ public class Graph<T> : IEnumerable<Vertex<T>>
         return GetEnumerator();
     }
 
+    public List<Vertex<T>> Sort(IGraphSorter<T> sorter)
+    {
+        return sorter.Sort(this);
+    }
 }

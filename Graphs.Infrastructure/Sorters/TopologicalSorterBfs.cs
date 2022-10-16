@@ -3,7 +3,7 @@ using Graphs.Core.Interfaces;
 
 namespace Graphs.Infrastructure.Sorters;
 
-public class TopologicalSorter<T> : IGraphSorter<T>
+public class TopologicalSorterBfs<T> : IGraphSorter<T>
 {
     public List<Vertex<T>> Sort(Graph<T> graph)
     {
@@ -17,7 +17,7 @@ public class TopologicalSorter<T> : IGraphSorter<T>
                 inDegree[vertex] = 0;
             }
 
-            vertex.Neighbors.ForEach(neighbor =>
+            vertex.Children.ForEach(neighbor =>
             {
                 if (inDegree.ContainsKey(neighbor))
                 {
@@ -47,7 +47,7 @@ public class TopologicalSorter<T> : IGraphSorter<T>
 
             if (graph.Contains(nextVertex))
             {
-                nextVertex.Neighbors.ForEach(neighbor =>
+                nextVertex.Children.ForEach(neighbor =>
                 {
                     if (inDegree.ContainsKey(neighbor) && inDegree[neighbor] > 0)
                     {

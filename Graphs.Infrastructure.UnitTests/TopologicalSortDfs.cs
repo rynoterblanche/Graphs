@@ -3,11 +3,8 @@ using Graphs.Infrastructure.Sorters;
 
 namespace Graphs.Infrastructure.UnitTests;
 
-public class TopologicalSorterNaiveBFS
+public class TopologicalSortDfs
 {
-
-    // TODO - extend sorter to handle DFS and weighted edges
-
     [Fact]
     public void SimpleGraphOrder()
     {
@@ -18,11 +15,10 @@ public class TopologicalSorterNaiveBFS
             .WithDirectedEdge("C", "D")
             .Build();
 
-        var sorted = new TopologicalSorter<string>().Sort(graph);
+        var sorted = new TopologicalSorterBfs<string>().Sort(graph);
         var sortedValues = string.Join("", sorted.Select(node => node.Value));
         Assert.Equal("ABCD", sortedValues);
     }
-
 
     [Fact]
     public void MoreComplexGraphOrder()
@@ -50,7 +46,7 @@ public class TopologicalSorterNaiveBFS
             .WithDirectedEdge("J", "K")
             .Build();
 
-        var sorted = new TopologicalSorter<string>().Sort(graph);
+        var sorted = new TopologicalSorterDfs<string>().Sort(graph);
         var sortedValues = string.Join("", sorted.Select(node => node.Value));
         Assert.Equal("ABCDEFGHIJK", sortedValues);
     }

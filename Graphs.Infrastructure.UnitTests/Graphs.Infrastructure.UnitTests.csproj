@@ -24,6 +24,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Graphs.Core\Graphs.Core.csproj" />
     <ProjectReference Include="..\Graphs.Infrastructure\Graphs.Infrastructure.csproj" />
+    <ProjectReference Include="..\Graphs.Shared\Graphs.Shared.csproj" />
   </ItemGroup>
 
 </Project>
