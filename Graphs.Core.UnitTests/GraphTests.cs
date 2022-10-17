@@ -31,7 +31,7 @@ namespace Graphs.Core.UnitTests
         }
 
         [Fact]
-        public void AddingSameVertexMoreThanOnceIsIdempotent()
+        public void AddSameVertexMoreThanOnceIsIdempotent()
         {
             var graph = new Graph<int>();
             var vertex = new Vertex<int>(1);
@@ -40,6 +40,19 @@ namespace Graphs.Core.UnitTests
 
             Assert.Single(graph);
             Assert.Equal(1, graph.First().Value);
+        }
+
+        [Fact]
+        public void AddNewVerticesWithTheSameValueIsUnique()
+        {
+            var graph = new Graph<int>();
+            graph.AddVertex(new Vertex<int>(1));
+            graph.AddVertex(new Vertex<int>(1));
+
+            Assert.Collection(graph,
+                item => Assert.Equal(1, item.Value),
+                item => Assert.Equal(1, item.Value)
+            );
         }
 
         [Fact]
