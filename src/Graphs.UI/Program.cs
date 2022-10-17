@@ -1,13 +1,26 @@
 ﻿using Graphs.Core.Entities;
 using Graphs.Infrastructure.Logging;
 using Graphs.Infrastructure.Printers;
+using Graphs.Infrastructure.Sorters;
+using Graphs.Shared.Interfaces;
+using Graphs.Shared.Tools;
 
-var graph = new GraphBuilder<int>()
-    .WithDirectedEdge(1, 2)
-    .WithDirectedEdge(1, 3)
-    .WithDirectedEdge(2, 4)
-    .WithDirectedEdge(3, 4)
-    .WithDirectedEdge(1, 4)
-    .Build();
+var graph = Dag.GenerateRandomGraph();
 
-new AdjacencyListPrinter<int>(new ConsoleLogger()).Print(graph);
+Console.WriteLine("=====================");
+
+var adjacencyListPrinter = new AdjacencyListPrinter<int>(new ConsoleLogger());
+
+adjacencyListPrinter.Print(graph);
+
+Console.WriteLine("=====================");
+
+var topologicalSorterBfs = new TopologicalSorterBfs<int>();
+
+var sorted = graph.Sort(topologicalSorterBfs);
+foreach (var vertex in sorted)
+{
+    var childValues = vertex.Children.Select(v => v.Value);
+    Console.WriteLine($"{vertex.Value} -> {string.Join(",", childValues)}");
+}
+
