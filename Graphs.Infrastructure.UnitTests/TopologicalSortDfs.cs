@@ -1,27 +1,14 @@
 ﻿using Graphs.Core.Entities;
 using Graphs.Infrastructure.Sorters;
+using Graphs.Shared.Exceptions;
 
 namespace Graphs.Infrastructure.UnitTests;
 
 public class TopologicalSortDfs
 {
-    [Fact]
-    public void SimpleGraphOrder()
-    {
-        var graph = new GraphBuilder<string>()
-            .WithDirectedEdge("A", "B")
-            .WithDirectedEdge("A", "D")
-            .WithDirectedEdge("B", "C")
-            .WithDirectedEdge("C", "D")
-            .Build();
-
-        var sorted = new TopologicalSorterBfs<string>().Sort(graph);
-        var sortedValues = string.Join("", sorted.Select(node => node.Value));
-        Assert.Equal("ABCD", sortedValues);
-    }
 
     [Fact]
-    public void MoreComplexGraphOrder()
+    public void AcyclicGraphSortsCorrectly()
     {
         var graph = new GraphBuilder<string>()
             .WithDirectedEdge("A", "B")
@@ -49,6 +36,23 @@ public class TopologicalSortDfs
         var sorted = new TopologicalSorterDfs<string>().Sort(graph);
         var sortedValues = string.Join("", sorted.Select(node => node.Value));
         Assert.Equal("ABCDEFGHIJK", sortedValues);
+    }
+
+    [Fact]
+    public void CyclicGraphRaisesError()
+    {
+        var graph = new GraphBuilder<string>()
+            .WithDirectedEdge("A", "B")
+            .WithDirectedEdge("A", "D")
+            .WithDirectedEdge("B", "C")
+            .WithDirectedEdge("C", "A")
+            .Build();
+
+        var topologicalSorterDfs = new TopologicalSorterDfs<string>();
+
+        void Action() => topologicalSorterDfs.Sort(graph);
+
+        Assert.Throws<CyclicGraphException<string>>(Action);
     }
 
 }

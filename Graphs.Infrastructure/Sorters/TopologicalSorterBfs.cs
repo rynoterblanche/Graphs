@@ -1,5 +1,6 @@
 ﻿using Graphs.Core.Entities;
 using Graphs.Core.Interfaces;
+using Graphs.Shared.Exceptions;
 
 namespace Graphs.Infrastructure.Sorters;
 
@@ -9,6 +10,7 @@ public class TopologicalSorterBfs<T> : IGraphSorter<T>
     {
         List<Vertex<T>> sorted = new();
         var inDegree = new Dictionary<Vertex<T>, int> ();
+        var visitedCount = 0;
 
         foreach (var vertex in graph)
         {
@@ -44,6 +46,7 @@ public class TopologicalSorterBfs<T> : IGraphSorter<T>
             var nextVertex = verticesWithZeroInDegree.First();
             sorted.Add(nextVertex);
             verticesWithZeroInDegree.Remove(nextVertex);
+            visitedCount++;
 
             if (graph.Contains(nextVertex))
             {
@@ -62,6 +65,9 @@ public class TopologicalSorterBfs<T> : IGraphSorter<T>
                 });
             }
         }
+
+        if (visitedCount != inDegree.Count)
+            throw new CyclicGraphException<T>("Cannot sort graph - cyclic dependency found");
 
         return sorted;
     }

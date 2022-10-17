@@ -1,5 +1,4 @@
-﻿using Graphs.Infrastructure.Printers;
-using Graphs.Shared.Interfaces;
+﻿using Graphs.Shared.Interfaces;
 
 namespace Graphs.Infrastructure.Logging;
 

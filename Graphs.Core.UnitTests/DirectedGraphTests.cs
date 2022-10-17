@@ -20,6 +20,20 @@ public class DirectedGraphTests
     }
 
     [Fact]
+    public void AddingAnEdgeSetsParentAndChild()
+    {
+        var graph = new Graph<int>();
+        var vertexA = new Vertex<int>(1);
+        var vertexB = new Vertex<int>(2);
+        graph.AddVertex(vertexA);
+        graph.AddVertex(vertexB);
+        graph.AddDirectedEdge(vertexA, vertexB);
+
+        Assert.Equal(vertexB, vertexA.Children[0]);
+        Assert.Equal(vertexA, vertexB.Parents[0]);
+    }
+
+    [Fact]
     public void AddSeveralEdges()
     {
         var graph = new Graph<int>();
