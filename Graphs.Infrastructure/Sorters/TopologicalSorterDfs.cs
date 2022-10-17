@@ -1,5 +1,6 @@
 ﻿using Graphs.Core.Entities;
 using Graphs.Core.Interfaces;
+using Graphs.Shared.Exceptions;
 
 namespace Graphs.Infrastructure.Sorters;
 
@@ -27,7 +28,7 @@ public class TopologicalSorterDfs<T> : IGraphSorter<T>
         {
             if (inProcess)
             {
-                throw new ArgumentException("Cyclic dependency found.");
+                throw new CyclicGraphException<T>("Cannot sort graph - cyclic dependency found");
             }
         }
         else

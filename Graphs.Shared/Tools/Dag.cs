@@ -50,7 +50,7 @@ public class Dag
         }
 
         if (tempEdges.Count > 0)
-            throw new CyclicGraphException<T>("Cannot sort cyclic graph!", tempEdges);
+            throw new CyclicGraphException<T>("Cannot sort graph - cyclic dependencies found");
 
         return sorted;
     }
