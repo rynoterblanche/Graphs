@@ -1,26 +1,25 @@
-﻿using Graphs.Core.Entities;
+﻿using System.Text;
+using Graphs.Core.Entities;
 using Graphs.Infrastructure.Logging;
-using Graphs.Infrastructure.Printers;
-using Graphs.Infrastructure.Sorters;
-using Graphs.Shared.Interfaces;
-using Graphs.Shared.Tools;
+using Graphs.Infrastructure.Printers;using Graphs.Shared.Tools;
 
-var graph = Dag.GenerateRandomGraph();
+var graph = Dag.GenerateRandomGraph(5, 25, 5, 25, 75);
 
-Console.WriteLine("=====================");
+new AdjacencyListPrinter<int>(new ConsoleLogger()).Print(graph);
 
-var adjacencyListPrinter = new AdjacencyListPrinter<int>(new ConsoleLogger());
+var adjList = GetAdjListAsString(graph);
 
-adjacencyListPrinter.Print(graph);
+File.WriteAllText("C:\\work\\Graphs\\src\\Graphs.UI\\dagAdjList.txt", adjList);
 
-Console.WriteLine("=====================");
-
-var topologicalSorterBfs = new TopologicalSorterBfs<int>();
-
-var sorted = graph.Sort(topologicalSorterBfs);
-foreach (var vertex in sorted)
+string GetAdjListAsString(Graph<int> vertices)
 {
-    var childValues = vertex.Children.Select(v => v.Value);
-    Console.WriteLine($"{vertex.Value} -> {string.Join(",", childValues)}");
-}
+    var stringBuilder = new StringBuilder();
+    foreach (var vertex in vertices)
+    {
+        var neighbors = vertex.Children.Aggregate(string.Empty, (s, v) => $"{s},{v.Value}");
+        stringBuilder.Append($"{vertex.Value} -> {neighbors}\n");
+    }
 
+    var adjList1 = stringBuilder.ToString();
+    return adjList1;
+}
