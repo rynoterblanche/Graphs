@@ -16,7 +16,7 @@ string GetAdjListAsString(Graph<int> vertices)
     var stringBuilder = new StringBuilder();
     foreach (var vertex in vertices)
     {
-        var neighbors = vertex.Children.Aggregate(string.Empty, (s, v) => $"{s},{v.Value}");
+        var neighbors = vertex.Children.Aggregate(string.Empty, (s, v) => $"{s}{v.Value},").TrimEnd(',');
         stringBuilder.Append($"{vertex.Value} -> {neighbors}\n");
     }
 
