@@ -26,7 +26,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{D43818C1-C43
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{342C254B-D9B1-4564-BC50-3CC725499844}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Graphs.Benchmarker", "Graphs.Benchmarker\Graphs.Benchmarker.csproj", "{0657AE42-A97E-43CA-82CF-55AE444446D4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Graphs.Benchmarker", "src\Graphs.Benchmarker\Graphs.Benchmarker.csproj", "{0657AE42-A97E-43CA-82CF-55AE444446D4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -12,8 +12,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\Graphs.Core\Graphs.Core.csproj" />
-    <ProjectReference Include="..\src\Graphs.Infrastructure\Graphs.Infrastructure.csproj" />
+    <ProjectReference Include="..\Graphs.Core\Graphs.Core.csproj" />
+    <ProjectReference Include="..\Graphs.Infrastructure\Graphs.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
