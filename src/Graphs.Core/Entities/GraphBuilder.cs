@@ -20,7 +20,7 @@ public class GraphBuilder<T>
             _graph.AddVertex(toVertex);
         }
 
-        _graph.AddDirectedEdge(fromVertex, toVertex);
+        _graph.AddEdge(fromVertex, toVertex);
 
         return this;
     }

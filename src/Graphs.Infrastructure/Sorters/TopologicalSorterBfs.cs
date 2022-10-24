@@ -6,7 +6,7 @@ namespace Graphs.Infrastructure.Sorters;
 
 public class TopologicalSorterBfs<T> : IGraphSorter<T>
 {
-    public List<Vertex<T>> Sort(Graph<T> graph)
+    public List<Vertex<T>> Sort(IGraph<T> graph)
     {
         List<Vertex<T>> sorted = new();
         var inDegree = new Dictionary<Vertex<T>, int> ();

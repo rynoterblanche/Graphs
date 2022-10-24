@@ -13,7 +13,7 @@ public class AdjacencyListPrinter<T> : IGraphPrinter<T>
         _logger = logger;
     }
     
-    public void Print(Graph<T> graph)
+    public void Print(IGraph<T> graph)
     {
         foreach (var vertex in graph)
         {

@@ -16,9 +16,9 @@ namespace Graphs.Shared.UnitTests
             graph.AddVertex(vertexA);
             graph.AddVertex(vertexB);
             graph.AddVertex(vertexC);
-            graph.AddDirectedEdge(vertexA, vertexB);
-            graph.AddDirectedEdge(vertexB, vertexC);
-            graph.AddDirectedEdge(vertexC, vertexA);
+            graph.AddEdge(vertexA, vertexB);
+            graph.AddEdge(vertexB, vertexC);
+            graph.AddEdge(vertexC, vertexA);
 
             Assert.False(Dag.IsAcyclic(graph));
         }
@@ -35,10 +35,10 @@ namespace Graphs.Shared.UnitTests
             graph.AddVertex(vertexB);
             graph.AddVertex(vertexC);
             graph.AddVertex(vertexD);
-            graph.AddDirectedEdge(vertexA, vertexB);
-            graph.AddDirectedEdge(vertexA, vertexD);
-            graph.AddDirectedEdge(vertexB, vertexC);
-            graph.AddDirectedEdge(vertexC, vertexD);
+            graph.AddEdge(vertexA, vertexB);
+            graph.AddEdge(vertexA, vertexD);
+            graph.AddEdge(vertexB, vertexC);
+            graph.AddEdge(vertexC, vertexD);
 
             Assert.True(Dag.IsAcyclic(graph));
         }

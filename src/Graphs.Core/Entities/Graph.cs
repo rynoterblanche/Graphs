@@ -3,7 +3,7 @@ using Graphs.Core.Interfaces;
 
 namespace Graphs.Core.Entities;
 
-public class Graph<T> : IEnumerable<Vertex<T>>
+public class Graph<T> : IGraph<T>
 {
     private readonly VertexList<T> _vertices;
     private readonly EdgeList<T> _edges;
@@ -34,7 +34,7 @@ public class Graph<T> : IEnumerable<Vertex<T>>
             _vertices.Add(vertex);
     }
 
-    public void AddDirectedEdge(Vertex<T> from, Vertex<T> to)
+    public void AddEdge(Vertex<T> from, Vertex<T> to)
     {
         if (Edges.Any(edge => edge.FromVertex == from && edge.ToVertex == to))
             return;

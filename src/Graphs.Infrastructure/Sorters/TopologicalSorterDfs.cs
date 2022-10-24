@@ -6,7 +6,7 @@ namespace Graphs.Infrastructure.Sorters;
 
 public class TopologicalSorterDfs<T> : IGraphSorter<T>
 {
-    public List<Vertex<T>> Sort(Graph<T> graph)
+    public List<Vertex<T>> Sort(IGraph<T> graph)
     {
         var sorted = new List<Vertex<T>>();
         var visited = new Dictionary<Vertex<T>, bool>();

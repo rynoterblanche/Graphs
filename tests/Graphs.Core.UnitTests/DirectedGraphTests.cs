@@ -12,7 +12,7 @@ public class DirectedGraphTests
         var vertexB = new Vertex<int>(2);
         graph.AddVertex(vertexA);
         graph.AddVertex(vertexB);
-        graph.AddDirectedEdge(vertexA, vertexB);
+        graph.AddEdge(vertexA, vertexB);
 
         var edge = graph.Edges.First();
         Assert.Equal(vertexA, edge.FromVertex);
@@ -27,7 +27,7 @@ public class DirectedGraphTests
         var vertexB = new Vertex<int>(2);
         graph.AddVertex(vertexA);
         graph.AddVertex(vertexB);
-        graph.AddDirectedEdge(vertexA, vertexB);
+        graph.AddEdge(vertexA, vertexB);
 
         Assert.Equal(vertexB, vertexA.Children[0]);
         Assert.Equal(vertexA, vertexB.Parents[0]);
@@ -43,8 +43,8 @@ public class DirectedGraphTests
         graph.AddVertex(vertexA);
         graph.AddVertex(vertexB);
         graph.AddVertex(vertexC);
-        graph.AddDirectedEdge(vertexA, vertexB);
-        graph.AddDirectedEdge(vertexA, vertexC);
+        graph.AddEdge(vertexA, vertexB);
+        graph.AddEdge(vertexA, vertexC);
 
         var edge1 = graph.Edges[0];
         Assert.Equal(vertexA, edge1.FromVertex);
@@ -63,8 +63,8 @@ public class DirectedGraphTests
         var vertexB = new Vertex<int>(2);
         graph.AddVertex(vertexA);
         graph.AddVertex(vertexB);
-        graph.AddDirectedEdge(vertexA, vertexB);
-        graph.AddDirectedEdge(vertexA, vertexB);
+        graph.AddEdge(vertexA, vertexB);
+        graph.AddEdge(vertexA, vertexB);
 
         Assert.Single(graph.Edges);
     }
