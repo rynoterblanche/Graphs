@@ -10,4 +10,8 @@
     <ProjectReference Include="..\Graphs.Core\Graphs.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Builders\" />
+  </ItemGroup>
+
 </Project>

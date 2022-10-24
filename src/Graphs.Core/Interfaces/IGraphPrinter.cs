@@ -1,6 +1,4 @@
-﻿using Graphs.Core.Entities;
-
-namespace Graphs.Core.Interfaces;
+﻿namespace Graphs.Core.Interfaces;
 
 public interface IGraphPrinter<T>
 {

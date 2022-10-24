@@ -32,12 +32,23 @@ public class Graph<T> : IGraph<T>
     {
         if (!_vertices.Contains(vertex))
             _vertices.Add(vertex);
+
+        foreach (var vertexChild in vertex.Children)
+        {
+            AddEdge(vertex, vertexChild);
+        }
     }
 
     public void AddEdge(Vertex<T> from, Vertex<T> to)
     {
         if (Edges.Any(edge => edge.FromVertex == from && edge.ToVertex == to))
             return;
+
+        if (!_vertices.Contains(from))
+            _vertices.Add(from);
+
+        if (!_vertices.Contains(to))
+            _vertices.Add(to);
 
         from.Children.Add(to);
         to.Parents.Add(from);

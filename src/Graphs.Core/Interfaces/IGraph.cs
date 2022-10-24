@@ -1,4 +1,6 @@
-namespace Graphs.Core.Entities;
+using Graphs.Core.Entities;
+
+namespace Graphs.Core.Interfaces;
 
 public interface IGraph<T>: IEnumerable<Vertex<T>>
 {

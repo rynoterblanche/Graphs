@@ -1,5 +1,4 @@
-﻿using Graphs.Core;
-using Graphs.Core.Entities;
+﻿using Graphs.Shared.Builders;
 using Graphs.Shared.Tools;
 
 namespace Graphs.Shared.UnitTests;
@@ -10,10 +9,10 @@ public class DagNaiveTopoSort
     public void SimpleGraphOrder()
     {
         var graph = new GraphBuilder<string>()
-            .WithDirectedEdge("A", "B")
-            .WithDirectedEdge("A", "D")
-            .WithDirectedEdge("B", "C")
-            .WithDirectedEdge("C", "D")
+            .WithEdge("A", "B")
+            .WithEdge("A", "D")
+            .WithEdge("B", "C")
+            .WithEdge("C", "D")
             .Build();
 
         var sorted = Dag.TopoSort(graph);
@@ -26,26 +25,26 @@ public class DagNaiveTopoSort
     public void MoreComplexGraphOrder()
     {
         var graph = new GraphBuilder<string>()
-            .WithDirectedEdge("A", "B")
-            .WithDirectedEdge("A", "C")
-            .WithDirectedEdge("A", "D")
-            .WithDirectedEdge("B", "D")
-            .WithDirectedEdge("B", "C")
-            .WithDirectedEdge("C", "D")
-            .WithDirectedEdge("D", "E")
-            .WithDirectedEdge("D", "F")
-            .WithDirectedEdge("D", "G")
-            .WithDirectedEdge("E", "F")
-            .WithDirectedEdge("E", "G")
-            .WithDirectedEdge("F", "G")
-            .WithDirectedEdge("A", "H")
-            .WithDirectedEdge("B", "H")
-            .WithDirectedEdge("G", "H")
-            .WithDirectedEdge("H", "I")
-            .WithDirectedEdge("D", "I")
-            .WithDirectedEdge("I", "J")
-            .WithDirectedEdge("I", "K")
-            .WithDirectedEdge("J", "K")
+            .WithEdge("A", "B")
+            .WithEdge("A", "C")
+            .WithEdge("A", "D")
+            .WithEdge("B", "D")
+            .WithEdge("B", "C")
+            .WithEdge("C", "D")
+            .WithEdge("D", "E")
+            .WithEdge("D", "F")
+            .WithEdge("D", "G")
+            .WithEdge("E", "F")
+            .WithEdge("E", "G")
+            .WithEdge("F", "G")
+            .WithEdge("A", "H")
+            .WithEdge("B", "H")
+            .WithEdge("G", "H")
+            .WithEdge("H", "I")
+            .WithEdge("D", "I")
+            .WithEdge("I", "J")
+            .WithEdge("I", "K")
+            .WithEdge("J", "K")
             .Build();
 
         var sorted = Dag.TopoSort(graph);

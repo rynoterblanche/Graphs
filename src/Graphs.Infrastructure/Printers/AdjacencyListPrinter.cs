@@ -1,5 +1,4 @@
-﻿using Graphs.Core.Entities;
-using Graphs.Core.Interfaces;
+﻿using Graphs.Core.Interfaces;
 using Graphs.Shared.Interfaces;
 
 namespace Graphs.Infrastructure.Printers;

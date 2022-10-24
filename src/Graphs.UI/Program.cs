@@ -1,13 +1,13 @@
-﻿using Graphs.Core.Entities;
-using Graphs.Infrastructure.Logging;
+﻿using Graphs.Infrastructure.Logging;
 using Graphs.Infrastructure.Printers;
+using Graphs.Shared.Builders;
 
 var graph = new GraphBuilder<int>()
-    .WithDirectedEdge(1, 2)
-    .WithDirectedEdge(1, 3)
-    .WithDirectedEdge(2, 4)
-    .WithDirectedEdge(3, 4)
-    .WithDirectedEdge(1, 4)
+    .WithEdge(1, 2)
+    .WithEdge(1, 3)
+    .WithEdge(2, 4)
+    .WithEdge(3, 4)
+    .WithEdge(1, 4)
     .Build();
 
 new AdjacencyListPrinter<int>(new ConsoleLogger()).Print(graph);
