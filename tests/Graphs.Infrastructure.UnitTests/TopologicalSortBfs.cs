@@ -25,7 +25,7 @@ public class TopologicalSortBfs
 
         void Action() => topologicalSorterBfs.Sort(graph);
 
-        Assert.Throws<CyclicGraphException<string>>(Action);
+        Assert.Throws<CyclicGraphException>(Action);
     }
 
 }

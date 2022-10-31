@@ -19,16 +19,15 @@ public class TopologicalSorterDfs<T> : IGraphSorter<T>
         return sorted;
     }
 
-    private void Visit(Vertex<T> vertex, List<Vertex<T>> sorted, Dictionary<Vertex<T>, bool> visited)
+    private void Visit(Vertex<T> vertex, ICollection<Vertex<T>> sorted, IDictionary<Vertex<T>, bool> visited)
     {
-        bool inProcess;
-        var alreadyVisited = visited.TryGetValue(vertex, out inProcess);
+        var alreadyVisited = visited.TryGetValue(vertex, out var inProcess);
 
         if (alreadyVisited)
         {
             if (inProcess)
             {
-                throw new CyclicGraphException<T>("Cannot sort graph - cyclic dependency found");
+                throw new CyclicGraphException("Cannot sort graph - cyclic dependency found");
             }
         }
         else
