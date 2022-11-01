@@ -1,6 +1,6 @@
 ﻿namespace Graphs.Shared.Exceptions;
 
-public class CyclicGraphException<T> : Exception
+public class CyclicGraphException : Exception
 {
 
     public CyclicGraphException() : base() { }

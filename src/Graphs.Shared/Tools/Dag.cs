@@ -12,7 +12,7 @@ public class Dag
         {
             Dag.TopoSort(graph);
         }
-        catch (CyclicGraphException<T>)
+        catch (CyclicGraphException)
         {
             return false;
         }
@@ -50,7 +50,7 @@ public class Dag
         }
 
         if (tempEdges.Count > 0)
-            throw new CyclicGraphException<T>("Cannot sort graph - cyclic dependencies found");
+            throw new CyclicGraphException("Cannot sort graph - cyclic dependencies found");
 
         return sorted;
     }

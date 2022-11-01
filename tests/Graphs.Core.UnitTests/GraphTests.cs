@@ -70,7 +70,7 @@ namespace Graphs.Core.UnitTests
     {
         public bool GraphSorted;
 
-        public List<Vertex<int>> Sort(Graph<int> graph)
+        public List<Vertex<int>> Sort(IGraph<int> graph)
         {
             GraphSorted = true;
             return graph.ToList();
